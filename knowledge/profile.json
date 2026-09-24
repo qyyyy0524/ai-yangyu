@@ -1,0 +1,110 @@
+{
+  "identity": {
+    "name": "Yangyu Que",
+    "english_name": "Edward",
+    "chinese_name": "阙杨煜",
+    "description": "A Computer Science undergraduate student interested in software development and artificial intelligence."
+  },
+
+  "education": {
+    "university": "The University of Western Australia",
+    "degree": "Bachelor's degree",
+    "major": "Computer Science",
+    "start_year": 2024,
+    "expected_graduation_year": 2027
+  },
+
+  "languages": {
+    "Chinese": "Native",
+    "English": "Working proficiency"
+  },
+
+  "technical_skills": {
+    "programming_languages": [
+      "Python",
+      "Java",
+      "JavaScript",
+      "C",
+      "C++"
+    ],
+    "web_development": [
+      "HTML",
+      "CSS",
+      "React",
+      "Next.js",
+      "Django",
+      "REST API"
+    ],
+    "databases": [
+      "SQL",
+      "MySQL",
+      "PostgreSQL"
+    ],
+    "tools": [
+      "Git",
+      "GitHub",
+      "Figma",
+      "Linux",
+      "VS Code"
+    ]
+  },
+
+  "projects": [
+    {
+      "name": "Mindfulness and Meditation App",
+      "type": "University Team Project",
+      "description": "A mindfulness and meditation web application developed by a six-person software development team.",
+      "contributions": [
+        "Designed desktop and mobile user interfaces using Figma",
+        "Developed frontend pages including Progress, Forum, Resources and Reminders",
+        "Worked on web push notification functionality",
+        "Integrated frontend features with a Django backend",
+        "Used GitHub Issues and Git for team development"
+      ],
+      "technologies": [
+        "React",
+        "Next.js",
+        "Django",
+        "Python",
+        "JavaScript",
+        "Figma",
+        "GitHub"
+      ]
+    },
+
+    {
+      "name": "QYY Letter",
+      "type": "Personal Project",
+      "description": "An interactive web-based digital letter with animations and bilingual content.",
+      "technologies": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Vercel"
+      ]
+    },
+
+    {
+      "name": "AI Yangyu",
+      "type": "Personal AI Project",
+      "description": "A personal AI digital twin designed to answer questions about Yangyu's background, skills, projects and experience.",
+      "status": "In development"
+    }
+  ],
+
+  "interests": [
+    "Artificial Intelligence",
+    "Software Engineering",
+    "Backend Development",
+    "Full-stack Development"
+  ],
+
+  "career": {
+    "current_goal": "Gain practical software engineering experience through internships and personal projects.",
+    "preferred_fields": [
+      "Backend Development",
+      "Full-stack Development",
+      "Artificial Intelligence"
+    ]
+  }
+}
