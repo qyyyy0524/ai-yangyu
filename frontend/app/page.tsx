@@ -27,21 +27,46 @@ export default function Home() {
     },
   ]);
   const [input, setInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  function sendMessage(event?: FormEvent) {
+  async function sendMessage(event?: FormEvent) {
     event?.preventDefault();
     const value = input.trim();
-    if (!value) return;
-    setMessages((current) => [
-      ...current,
-      { role: "user", content: value },
-      {
-        role: "assistant",
-        content:
-          "The interface is ready. In the next step, this message will come from the FastAPI + OpenAI backend instead of this placeholder.",
-      },
-    ]);
+    if (!value || isLoading) return;
+
+    setMessages((current) => [...current, { role: "user", content: value }]);
     setInput("");
+    setIsLoading(true);
+
+    try {
+      const response = await fetch("http://127.0.0.1:8000/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: value }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Backend returned ${response.status}`);
+      }
+
+      const data: { answer: string } = await response.json();
+      setMessages((current) => [
+        ...current,
+        { role: "assistant", content: data.answer },
+      ]);
+    } catch (error) {
+      console.error(error);
+      setMessages((current) => [
+        ...current,
+        {
+          role: "assistant",
+          content:
+            "I couldn’t reach the AI Yangyu backend. Please make sure the FastAPI server is running on port 8000.",
+        },
+      ]);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -85,7 +110,7 @@ export default function Home() {
         <section className="chat glass">
           <div className="chatTop">
             <div><span className="onlineDot" /><b>AI Yangyu</b><small>Digital twin · Online</small></div>
-            <span className="modelPill">AI powered</span>
+            <span className="modelPill">{isLoading ? "Thinking..." : "AI powered"}</span>
           </div>
 
           <div className="messages">
@@ -95,6 +120,12 @@ export default function Home() {
                 <div className="bubble">{message.content}</div>
               </div>
             ))}
+            {isLoading && (
+              <div className="messageRow">
+                <span className="avatar">Y</span>
+                <div className="bubble">Thinking...</div>
+              </div>
+            )}
           </div>
 
           <div className="promptRow">
@@ -105,8 +136,13 @@ export default function Home() {
 
           <form className="composer" onSubmit={sendMessage}>
             <span className="plus">＋</span>
-            <input value={input} onChange={(e) => setInput(e.target.value)} placeholder="Ask me anything about Yangyu..." />
-            <button className="send" type="submit">↑</button>
+            <input
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              placeholder="Ask me anything about Yangyu..."
+              disabled={isLoading}
+            />
+            <button className="send" type="submit" disabled={isLoading}>↑</button>
           </form>
           <p className="hint">AI Yangyu answers from a personal knowledge base · Built with Next.js, FastAPI & OpenAI</p>
         </section>
